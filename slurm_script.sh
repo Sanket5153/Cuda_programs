@@ -12,6 +12,7 @@
 
 executable=$1
 
+#Edit according to CUDA Environment
 source source_env.sh
 
 #nvcc test.cu -o test
