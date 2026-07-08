@@ -1,19 +1,21 @@
 #!/bin/bash
 
-#SBATCH -N 2
-#SBATCH -J test
-#SBATCH -p gpu
-#SBATCH --qos=gpumultinode    #(for two gpu)
+#SBATCH --nodes 1
+#SBATCH --job-name test
+#SBATCH --output=%j.out
+#SBATCH --error=%j.err
+#SBATCH --partition gpu
 #SBATCH --gres=gpu:1
-##SBATCH --qos=nsm            # (for cpu, hm, and 1 gpu)
-#SBATCH --reservation=hpcws
+#SBATCH --reservation=dsu
 
 executable=$1
 
 #Edit according to CUDA Environment
-source source_env.sh
+# source env_script.sh
+
+# hostname
+
+# nvidia-smi
 
 #nvcc test.cu -o test
 time ./$executable
-
-
