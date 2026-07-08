@@ -1,10 +1,8 @@
 #!/bin/bash
 
-## Change this script according to own envrionment
+. /home/apps/spack/share/spack/setup-env.sh
+spack load cuda/kr6npmd
 
-#Setup of SPACK Environment
-source /home/apps/spack/share/spack/setup-env.sh
+echo "CUDA loaded into ENV"
 
-#Setup of CUDA Environment
-spack load cuda/t34vp3s
-
+nvcc --version
