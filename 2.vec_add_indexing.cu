@@ -2,14 +2,19 @@
 #include <stdlib.h>
 #include <cuda_runtime.h>
 
-#define SIZE 1024
+#define SIZE 1024*2
 
 // CUDA Kernel
 __global__ void vectorAdd(int *A, int *B, int *C)
 {
-    int i = threadIdx.x;
+     // Global thread indexing
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
 
-    C[i] = A[i] + B[i];
+    // Boundary check
+    if (i < size)
+    {
+        C[i] = A[i] + B[i];
+    }
 }
 
 int main()
@@ -55,10 +60,10 @@ int main()
     // 1 Block and 1024 Threads
     // =========================================================
 
-    vectorAdd<<<1, 1024>>>(d_A, d_B, d_C);
+    vectorAdd<<<2, 1024>>>(d_A, d_B, d_C);
 
     // Wait for GPU to complete kernel execution
-    cudaDeviceSynchronize();
+   // cudaDeviceSynchronize();
 
     // =========================================================
     // Step 5: Copy Result from GPU to CPU
@@ -70,12 +75,10 @@ int main()
     // Step 6: Print Results
     // =========================================================
 
-    for (int i = 0; i < 1024; i++)
+    for (int i = 1024; i < 2048; i++)
     {
-        printf("A[%d] = %d, B[%d] = %d + C[%d] = %d\n",
-               i, h_A[i],
-               i, h_B[i],
-               i, h_C[i]);
+    printf("C[%d] = A[%d] + B[%d] = %d + %d = %d\n",
+           i, i, i, h_A[i], h_B[i], h_C[i]);
     }
 
     // =========================================================
