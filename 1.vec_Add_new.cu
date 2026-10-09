@@ -55,7 +55,7 @@ int main()
     // 1 Block and 1024 Threads
     // =========================================================
 
-    vectorAdd<<<1, 1025>>>(d_A, d_B, d_C);
+    vectorAdd<<<1, 1024>>>(d_A, d_B, d_C);
 
     // Wait for GPU to complete kernel execution
    // cudaDeviceSynchronize();
@@ -70,13 +70,8 @@ int main()
     // Step 6: Print Results
     // =========================================================
 
-    for (int i = 0; i < 5; i++)
-    {
-        printf("A[%d] = %d, B[%d] = %d + C[%d] = %d\n",
-               i, h_A[i],
-               i, h_B[i],
-               i, h_C[i]);
-    }
+   printf("C[%d] = A[%d] + B[%d] = %d + %d = %d\n",
+       i, i, i, h_A[i], h_B[i], h_C[i]);
 
     // =========================================================
     // Step 7: Free GPU Memory
