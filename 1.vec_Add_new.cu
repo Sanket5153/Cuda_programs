@@ -70,8 +70,11 @@ int main()
     // Step 6: Print Results
     // =========================================================
 
-   printf("C[%d] = A[%d] + B[%d] = %d + %d = %d\n",
-       i, i, i, h_A[i], h_B[i], h_C[i]);
+    for (int i = 0; i < 5; i++)
+    {
+    printf("C[%d] = A[%d] + B[%d] = %d + %d = %d\n",
+           i, i, i, h_A[i], h_B[i], h_C[i]);
+    }
 
     // =========================================================
     // Step 7: Free GPU Memory
